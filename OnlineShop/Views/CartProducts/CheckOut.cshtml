@@ -1,0 +1,158 @@
+﻿
+@{
+    ViewBag.Title = "ChechOut";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Cart = (List<OnlineShop.Models.ClientModel.CartProduct>)Session[OnlineShop.Common.Const.CartProduct];
+}
+
+
+<div style="padding-bottom:10px;" class="page-head_agile_info_w3l">
+    <div class="container">
+
+        <div class="services-breadcrumb">
+            <div class="agile_inner_breadcrumb">
+
+                <ul class="w3_short">
+                    <li><a href="/">Trang Chủ</a><i>|</i></li>
+                    <li>Thanh Toán</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="bodyCart">
+    <div class="headercart" >  <h2>_____Thanh Toán_____</h2></div>
+
+    <button type="button" class="btn btn-primary btnDetailsCart" data-toggle="modal" data-target="#myModal3">
+        Xem chi tiết Giỏ Hàng
+    </button>
+
+    <!-- The Modal -->
+    <div class="modal" id="myModal3">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Giỏ Hàng</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body ">
+
+                    @if (Cart != null)
+                    {
+                        <table class="table table-striped table-bordered  table-responsive " >
+                            <thead>
+                                <tr>
+                                    <th>Sản Phẩm</th>
+                                    <th>Hình ảnh</th>
+                                    <th role="textbox">Số Lượng</th>
+                                    <th> Đơn Giá</th>
+                                    <th>Tổng Giá</th>
+                                    <th>Giảm giá</th>
+                                    <th>Thành Tiền</th>
+
+                            </thead>
+                            <tbody>
+                                @{
+                                    foreach (var item in Cart)
+                                    {
+                                        <tr role="row">
+                                            <td>@item.Product.ProductName</td>
+                                            <td><img class="img-responsive" style="width:100px; height:100px;" src="@item.Product.ProductImages[0]" /></td>
+                                            <td role="textbox">@item.Quantity</td>
+                                            <td>@item.Product.ProductPrice.ToString("N0") VND</td>
+                                            <td>@{ var price = item.Product.ProductPrice * item.Quantity;} @price.ToString("N0") VND</td>
+                                            <td>@item.Product.ProductSale %</td>
+                                            <td>@{ var sum = (item.Product.ProductPrice * (1 - (item.Product.ProductSale / 100))) * item.Quantity;} @sum.ToString("N0") VND</td>
+
+
+                                        </tr>
+                                    }
+                                }
+
+
+
+                            </tbody>
+                        </table>
+                    }
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    @if (Cart != null)
+    {
+
+
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Tổng Tiền</th>
+                    <th>Giảm Giá</th>
+                    <th>Thành Tiền</th>
+                </tr>
+
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Cart.Sum(q => q.Quantity * q.Product.ProductPrice).ToString("N0") VND</td>
+                    <td>@Cart.Sum(q => q.Quantity * q.Product.ProductPrice * q.Product.ProductSale / 100).ToString("N0") VND</td>
+                    <td>@Cart.Sum(q => q.Quantity * q.Product.ProductPrice * (1 - q.Product.ProductSale / 100)).ToString("N0") VND</td>
+                </tr>
+            </tbody>
+        </table>
+        //Form thông tin khách hàng
+        <div class="row">
+            <div class="col-lg-6 form" >
+                <form style="padding:5%;" action="#">
+                    <div class="form-group">
+                        Họ Tên Người Nhận :
+                        <input type="text" class="form-control" id="">
+                    </div>
+                    <div class="form-group">
+                        Số điện thoại người nhận:
+                        <input type="number" class="form-control" id="phone">
+                    </div>
+                    <div class="form-group">
+                        Email người nhận:
+                        <input type="email" class="form-control" id="email">
+                    </div>
+                    <div class="form-group">
+                        Địa chỉ người nhận:
+                        <input type="text" class="form-control" id="address">
+                    </div>
+                    <div class="form-group">
+                        Ghi Chú :
+                        <input type="text" class="form-control" id="note">
+                    </div>
+                    <button type="submit" class="btn btn-primary btnSubmit">Xác Nhận Đặt Hàng</button>
+                </form>
+            </div>
+            <div class="col-lg-6">
+                <img class="imgcart  img-responsive" src="~/Assets/images/cart.jpg" />
+            </div>
+        </div>
+        ///.................................................//////////
+        <div style="padding-top:50px;">
+            <a href="/Gio-hang" class="btn btn-dark"><i class="fa fa-backward"></i> Quay Lại Giỏ Hàng</a>
+          
+        </div>
+
+    }
+    else
+    { <h4> Giỏ hàng của bạn đang trống !</h4>
+        <a href="/" class="btn btn-dark"><i class="fa fa-backward"></i> Tiếp Tục Mua Hàng</a>}
+</div>
+
+@{Html.RenderAction("NewProducts", "ProductsClient"); }

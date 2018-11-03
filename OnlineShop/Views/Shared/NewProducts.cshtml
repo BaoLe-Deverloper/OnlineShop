@@ -1,0 +1,56 @@
+﻿@model List<OnlineShop.Models.ClientModel.ProductModel>
+<div class="single-pro">
+    <div style="text-align:center;">  <h2>_____ Sản Phẩm Mới _____</h2></div>
+
+    <!--Phần sản phẩm-->
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3 product-men">
+            <div class="men-pro-item simpleCart_shelfItem">
+                <div class="men-thumb-item">
+
+
+                    @{ if (item.ProductImages.Count > 1)
+                        {
+                            <img style="height:270px;" src="@item.ProductImages[0]" alt="" class="pro-image-front">
+                            <img style="height:270px;" src="@item.ProductImages[1]" alt="" class="pro-image-back">
+                        }
+                        else
+                        {
+                            <img style="height:270px;" src="@item.ProductImages[0]" alt="" class="pro-image-front">
+                            <img style="height:270px;" src="@item.ProductImages[0]" alt="" class="pro-image-back">
+                        }
+                    }
+                    <div class="men-cart-pro">
+                        <div class="inner-men-cart-pro">
+                            <a href="/chi-tiet-san-pham-@item.ProductID" class="link-product-add-cart">Xem Chi tiết</a>
+                        </div>
+                    </div>
+                    <span class="product-new-top">New</span>
+
+                </div>
+                <div class="item-info-product ">
+                    <h4><a href="/chi-tiet-san-pham-@item.ProductID">@item.ProductName</a></h4>
+                    <div class="info-product-price">
+                        @if (item.ProductSale != 0)
+                        {
+                            <span class="item_price">@{ var PriveAfterSale = item.ProductPrice * (1 - item.ProductSale / 100);} @PriveAfterSale.ToString("N0") VND</span>
+                            <del>@item.ProductPrice.ToString("N0") VND</del>
+                        }
+                        else
+                        {
+                            <span class="item_price">@item.ProductPrice.ToString("N0") VND</span>
+                        }
+                    </div>
+                    <div>
+                        <a href="#" class="btn btn-success btnAddCart" data-id="@item.ProductID" data-name="@item.ProductName" data-quantity="1">Thêm vào giỏ hàng</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+
+    <!--hết Phần sản phẩm-->
+    <div class="clearfix"></div>
+</div>

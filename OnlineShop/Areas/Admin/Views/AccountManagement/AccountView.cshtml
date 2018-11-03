@@ -1,0 +1,80 @@
+﻿@model OnlineShop.Areas.Admin.Model.AccountAdminModel
+
+<div>
+    <h4>Thông Tin tài Khoản</h4>
+    <hr />
+    <div style="float:left;width:50%; margin-left:15px;">
+        <dl class="dl-horizontal">
+            <dd>
+                <img style="width:100px; height:100px;" src='@Model.UserImage' />
+
+            </dd>
+            <dt>
+
+                <b>
+                    @Html.DisplayFor(model => model.UserName)
+                </b>
+
+                <br />
+            </dt>
+
+            <dd>
+                <b> Chức Vụ : </b>
+                @ViewBag.Quyen
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UserEmail)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserEmail)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UserDateCreate)
+            </dt>
+
+            <dd>
+                @Model.UserDateCreate
+            </dd>
+
+        </dl>
+    </div>
+    <div>
+        <dl class="dl-horizontal">
+
+            <dd>
+                <b>Trạng Thái Kích Hoạt:</b> 
+                @Model.UserActive
+            </dd>
+
+          
+            <dd>
+                <b>Lương Tháng : </b>
+                @Model.UserLuong.ToString("N0") VND
+              
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UserAddress)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserAddress)
+            </dd>
+
+          
+           
+            <dt>
+                @Html.DisplayNameFor(model => model.UserPhone)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserPhone)
+            </dd>
+
+        </dl>
+    </div>
+</div>
+

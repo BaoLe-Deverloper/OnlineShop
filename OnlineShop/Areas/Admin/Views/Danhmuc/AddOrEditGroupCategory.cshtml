@@ -1,0 +1,40 @@
+﻿@model OnlineShop.Models.GroupCategory
+
+@{
+    Layout = null;
+}
+
+
+@using (Html.BeginForm("AddOrEditGroupCategory", "Danhmuc", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>TypeProduct</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="form-group">
+            Tên Nhóm Danh Mục
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NAME, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NAME, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Loại Nhóm Danh Mục
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.IDType, new SelectList(ViewBag.ListType, "IDType", "TypeName"), htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IDType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button id="Btn-Save" style="padding-right:30px;" class="btn btn-success"><i style="padding-right:10px;" class="fa fa-save"></i>Lưu</button>
+            </div>
+        </div>
+    </div>
+}

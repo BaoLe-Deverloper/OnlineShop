@@ -1,0 +1,92 @@
+﻿@model OnlineShop.Areas.Admin.Model.AccountAdminModel
+
+@using (Html.BeginForm("AddOrEditAccount", "AccountManagement", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.UserID)
+<div style="float:left; width:50%;">
+    <div class="form-group">
+        @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label " })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.IDQuyen, htmlAttributes: new { @class = "control-label " })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.IDQuyen, new SelectList(ViewBag.ListChucVu, "ID", "QuyenUser") ,new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.IDQuyen, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.UserEmail, htmlAttributes: new { @class = "control-label" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.UserEmail, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.UserLuong, htmlAttributes: new { @class = "control-label" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.UserLuong, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.UserLuong, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Lưu </button>
+        </div>
+    </div>
+</div>
+    <div style="float:left; width:50%;">
+       
+        <div class="form-group">
+        <a style="margin-left:15px;" id="SelectImage" class=" btn btn-secondary" ><i class="fa fa-image"/> Chọn Ảnh</a>
+           
+        <div class="col-md-10">
+            <br />
+            @Html.EditorFor(model => model.UserImage, new { htmlAttributes = new { @class = "form-control" }  })
+            @Html.ValidationMessageFor(model => model.UserImage, "", new { @class = "text-danger" })
+        </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserAddress, htmlAttributes: new { @class = "control-label " })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserAddress, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserAddress, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserPhone, htmlAttributes: new { @class = "control-label" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserPhone, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserPhone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+      
+</div>
+}
+
+<script>
+
+    $(document).ready(function () {
+        $('#SelectImage').on('click', function (e) {
+            e.preventDefault();
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (url) {
+                $('#UserImage').val(url);
+                
+            };
+            finder.popup();
+        })
+    });
+</script>

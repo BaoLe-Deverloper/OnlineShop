@@ -1,0 +1,247 @@
+﻿
+@{
+    ViewBag.Title = "_Layout";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Thời trang cho mọi người.</title>
+    <!--/tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Thời trang cao cấp Việt." />
+    <script type="application/x-javascript">
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+               function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!--//tags -->
+
+    <link href="/Assets/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/Assets/css/jquery-ui.min.css" rel="stylesheet" />
+    <link href="/Assets/css/style.css" rel="stylesheet" type="text/css" media="all" />
+
+
+    <link rel="stylesheet" href="/Assets/css/flexslider.css" type="text/css" media="screen" />
+    <link href="/Assets/css/font-awesome.css" rel="stylesheet">
+    <link href="/Assets/css/easy-responsive-tabs.css" rel='stylesheet' type='text/css' />
+    <!-- //for bootstrap working -->
+    <link href="~/Assets/css/MyStyle.css" rel="stylesheet" />
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic' rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <!-- header -->
+    <div class="header" id="home">
+        <div class="container">
+            <ul>
+                @{
+                    if (Session["User"] != null)
+                    {
+
+                        <div class="btn-group dropright">
+                            <button class="btn btn-primary dropdown-toggle"
+                                    type="button"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                Tài Khoản: @Session["User"]
+                            </button>
+                            <div style="padding-left:25px;" class="dropdown-menu">
+                                <a class="dropdown-item" href="/Home/Logout"> <i class="fa fa-unlock-alt" aria-hidden="true"></i>  Đăng Xuất</a>
+
+                            </div>
+                        </div>
+
+
+                    }
+                    else
+                    {
+                        <li> <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Sign In </a></li> }
+
+                }
+
+                <li> <a href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Sign Up </a></li>
+                <li><i class="fa fa-phone" aria-hidden="true"></i> Call : +79807030105</li>
+                <li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="Baolehvpkkq@gmail.com">Baolehvpkkq@gmail.com</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- //header -->
+    <!-- header-bot -->
+    <!-- //header-bot -->
+    <!-- banner -->
+    @{Html.RenderAction("Menubanner", "Home");}
+
+    <!-- //banner-top -->
+
+    <script src="/Scripts/jquery-1.12.4.min.js"></script>
+    <!-- Modal1 -->
+    @{Html.RenderAction("Login", "Home");}
+    <!-- //Modal1 -->
+    <!-- Modal2 -->
+    @{Html.RenderAction("SignUp", "Home");}
+    <!-- //Modal2 -->
+    @RenderBody()
+    <!--/grids-->
+    <div class="coupons">
+        <div class="coupons-grids text-center">
+            <div class="w3layouts_mail_grid">
+                <div class="col-md-3 w3layouts_mail_grid_left">
+                    <div class="w3layouts_mail_grid_left1 hvr-radial-out">
+                        <i class="fa fa-truck" aria-hidden="true"></i>
+                    </div>
+                    <div class="w3layouts_mail_grid_left2">
+                        <h3>FREE SHIPPING</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur</p>
+                    </div>
+                </div>
+                <div class="col-md-3 w3layouts_mail_grid_left">
+                    <div class="w3layouts_mail_grid_left1 hvr-radial-out">
+                        <i class="fa fa-headphones" aria-hidden="true"></i>
+                    </div>
+                    <div class="w3layouts_mail_grid_left2">
+                        <h3>24/7 SUPPORT</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur</p>
+                    </div>
+                </div>
+                <div class="col-md-3 w3layouts_mail_grid_left">
+                    <div class="w3layouts_mail_grid_left1 hvr-radial-out">
+                        <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                    </div>
+                    <div class="w3layouts_mail_grid_left2">
+                        <h3>MONEY BACK GUARANTEE</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur</p>
+                    </div>
+                </div>
+                <div class="col-md-3 w3layouts_mail_grid_left">
+                    <div class="w3layouts_mail_grid_left1 hvr-radial-out">
+                        <i class="fa fa-gift" aria-hidden="true"></i>
+                    </div>
+                    <div class="w3layouts_mail_grid_left2">
+                        <h3>FREE GIFT COUPONS</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur</p>
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+
+        </div>
+    </div>
+    <!--grids-->
+  @{ Html.RenderAction("footer", "Home");}
+    <!-- login -->
+    <!-- //login -->
+    <a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+
+    <!-- js -->
+    @*<script type="text/javascript" src="/Assets/js/jquery-2.1.4.min.js"></script>*@
+    <!-- //js -->
+
+
+    <script src="/Assets/js/responsiveslides.min.js"></script>
+    <script>
+        // You can also use "$(window).load(function() {"
+        $(function () {
+            // Slideshow 4
+            $("#slider3").responsiveSlides({
+                auto: true,
+                pager: true,
+                nav: false,
+                speed: 500,
+                namespace: "callbacks",
+                before: function () {
+                    $('.events').append("<li>before event fired.</li>");
+                },
+                after: function () {
+                    $('.events').append("<li>after event fired.</li>");
+                }
+            });
+        });
+    </script>
+
+    <script src="/Assets/js/modernizr.custom.js"></script>
+    <script src="/Assets/js/jquery-ui-1.12.1.min.js"></script>
+    <script src="/Assets/js/easy-responsive-tabs.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#horizontalTab').easyResponsiveTabs({
+                type: 'default', //Types: default, vertical, accordion
+                width: 'auto', //auto or any width like 600px
+                fit: true,   // 100% fit in a container
+                closed: 'accordion', // Start closed if in accordion view
+                activate: function (event) { // Callback function if tab is switched
+                    var $tab = $(this);
+                    var $info = $('#tabInfo');
+                    var $name = $('span', $info);
+                    $name.text($tab.text());
+                    $info.show();
+                }
+            });
+            $('#verticalTab').easyResponsiveTabs({
+                type: 'vertical',
+                width: 'auto',
+                fit: true
+            });
+        });
+    </script>
+
+    <script src="/Assets/js/jquery.waypoints.min.js"></script>
+
+    <script type="text/javascript" src="/Assets/js/move-top.js"></script>
+    <script type="text/javascript" src="/Assets/js/jquery.easing.min.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
+            });
+        });
+    </script>
+    <!-- here stars scrolling icon -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var defaults = {
+                containerID: 'toTop', // fading element id
+                containerHoverID: 'toTopHover', // fading element hover id
+                scrollSpeed: 1200,
+                easingType: 'linear'
+            };
+
+
+            $().UItoTop({ easingType: 'easeOutQuart' });
+
+        });
+    </script>
+    <script src="/Assets/admin/js/notify.min.js"></script>
+    <script>
+        $('.btnAddCart').on('click', function (e) {
+            e.preventDefault();
+            var NumberProduct = $(this).data('id');
+            var Quantity = $(this).data('quantity');
+            var NameProduct = $(this).data('name');
+            
+            $.ajax({
+                type: 'Post',
+                data: {
+                    "ID": NumberProduct,
+                    "Quantity": Quantity
+                },
+                url: '/CartProducts/AddCart',
+                success: function (data) {
+                    var n = new String(parseInt(data.Sum));
+                   
+                    $.notify("Đã Thêm " + NameProduct + " Vào Giỏ Hàng", "success");
+                    $('.CartProduct').children().remove();
+                    $('.CartProduct').append(" <a href='/Gio-Hang' style='color: #0c80e4;'><i class='fa fa-cart-arrow-down' aria-hidden='true'></i> Giỏ Hàng " + data.QuantityItem + " Sản Phẩm <br><p style='color: #e85927;'>Tổng Tiền: " + n.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + " VND</p></a>");
+                }
+            });
+        })
+    </script>
+
+
+
+    @RenderSection("jsFooter", required: false)
+    <script type="text/javascript" src="/Assets/js/bootstrap.js"></script>
+</body>
+</html>
+

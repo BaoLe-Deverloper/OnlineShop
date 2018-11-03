@@ -1,0 +1,111 @@
+﻿
+@{
+    ViewBag.Title = "CategoryGroup";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<a class="btn btn-success" onclick="PopupFrom('@Url.Action("AddOrEditGroupCategory", "Danhmuc")')" style="margin:20px;"><i class="fa fa-plus"> Thêm Nhóm Danh mục</i></a>
+<table id="tableType" class="table table-striped table-bordered" style="font-size: 14px;">
+    <thead>
+        <tr>
+            <th>Tên Nhóm Danh Mục</th>
+            <th>Loại Nhóm</th>
+            <td>Hành Động</td>
+    </thead>
+</table>
+
+@section jsFooter{
+
+    <script>
+        var Popup, dataTableGroupCategory;
+
+        dataTableGroupCategory = $('#tableType').DataTable({
+            "ajax":
+                {
+                    "url": '/Admin/Danhmuc/GetTableGroupCategory',
+                    "type": "Get",
+                    "datatype": "json"
+
+                },
+
+            "columns": [
+                { "data": "NAME", "autoWidth": true },
+                { "data": "TypeName", "autoWidth": true },
+                {
+                    "data": "ID", "render": function (data) {
+                        return "<a class='btn btn-light'  onclick = PopupFrom('@Url.Action("AddOrEditGroupCategory", "Danhmuc")/" + data + "') ><i class='fa fa-pencil'> Sửa</i></a> <a class='btn btn-warning'  onclick=Delete('@Url.Action("DeleteGroupCategory", "DanhMuc")/" + data + "')><i class='fa fa-trash'> Xóa</i></a>";
+                    },
+                    "oderable": false,
+                    "width": "150px"
+                }
+            ]
+        });
+
+
+       
+        function PopupFrom(url) {
+            var formDiv = $('<div/>');
+            $.get(url)
+                .done(function (response) {
+                    formDiv.html(response);
+
+                    Popup = formDiv.dialog({
+                        autoOpen: true,
+
+                        resizable: false,
+
+                        height: 400,
+                        model: true,
+                        width: 500,
+                        close: function () {
+                            Popup.dialog('destroy').remove();
+                        }
+                    });
+                });
+        }
+
+        function SubmitForm(form) {
+            $.validator.unobtrusive.parse(form);
+            if ($(form).valid) {
+                $.ajax({
+
+
+                    url: form.action,
+                    type: "post",
+                    data: $(form).serialize(),
+
+                    success: function (data) {
+                        if (data.Result) {
+                            $.notify(data.message, "success");
+                            Popup.dialog('close');
+                            dataTableGroupCategory.ajax.reload();
+                        }
+                    }
+                });
+
+            };
+            return false;
+        };
+        function Delete(url) {
+            if (confirm('Bạn có chắc muốn xóa Sản phẩm này không?')) {
+
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+
+                    success: function (data) {
+                        if (data.Result) {
+                            $.notify(data.message, "success", { align: "center" });
+                      
+                            dataTableGroupCategory.ajax.reload();
+                        }
+                    }
+                });
+            };
+        }
+    </script>
+}
+
+

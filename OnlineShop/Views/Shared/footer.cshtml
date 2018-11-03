@@ -1,0 +1,105 @@
+﻿  <!-- footer -->
+@model OnlineShop.Models.ClientModel.ShopInfo
+<div class="footer">
+    <div class="footer_agile_inner_info_w3l">
+        <div class="col-md-3 footer-left">
+            <h2><a href="/"><span>B</span>@Model.Name</a></h2>
+            <p>
+               @Model.Info
+            </p>
+            <ul class="social-nav model-3d-0 footer-social w3_agile_social two">
+                <li>
+                    <a href="@Model.Facebook" class="facebook">
+                        <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                        <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                    </a>
+                </li>
+               
+                <li>
+                    <a href="#" class="instagram">
+                        <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                        <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="Zalo">
+                        <div class="front"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+                        <div class="back"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-9 footer-right">
+            <div class="sign-grds">
+                <div class="col-md-4 sign-gd">
+                    <h4> Thông tin </h4>
+                    <ul>
+                        <li><a href="/">Trang chủ</a></li>
+                        <li><a href="/Thoi-trang-Nam-1">Thời Trang Nam</a></li>
+                        <li><a href="/Thoi-trang-Nu-2">Thời Trang Nữ</a></li>
+                        <li><a href="/">Thông Tin</a></li>
+                       
+                    </ul>
+                </div>
+
+                <div class="col-md-5 sign-gd-two">
+                    <h4>Store <span>Information</span></h4>
+                    <div class="w3-address">
+                        <div class="w3-address-grid">
+                            <div class="w3-address-left">
+                                <i class="fa fa-phone" aria-hidden="true"></i>
+                            </div>
+                            <div class="w3-address-right">
+                                <h6>Số Điện Thoại</h6>
+                                <p>@Model.PhoneNumber</p>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                        <div class="w3-address-grid">
+                            <div class="w3-address-left">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </div>
+                            <div class="w3-address-right">
+                                <h6>Email Address</h6>
+                                <p>Email :<a href="mailto:@Model.Email">@Model.Email</a></p>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                        <div class="w3-address-grid">
+                            <div class="w3-address-left">
+                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                            </div>
+                            <div class="w3-address-right">
+                                <h6>Địa Chỉ</h6>
+                                <p>
+                                    @Model.Address
+
+                                </p>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 sign-gd flickr-post">
+                    <h4>Flickr <span>Posts</span></h4>
+                    <ul>
+                        <li><a href="single.html"><img src="/Assets/images/t1.jpg" alt=" " class="img-responsive" /></a></li>
+                        <li><a href="single.html"><img src="/Assets/images/t2.jpg" alt=" " class="img-responsive" /></a></li>
+                        <li><a href="single.html"><img src="/Assets/images/t3.jpg" alt=" " class="img-responsive" /></a></li>
+                        <li><a href="single.html"><img src="/Assets/images/t4.jpg" alt=" " class="img-responsive" /></a></li>
+                        <li><a href="single.html"><img src="/Assets/images/t1.jpg" alt=" " class="img-responsive" /></a></li>
+                        <li><a href="single.html"><img src="/Assets/images/t2.jpg" alt=" " class="img-responsive" /></a></li>
+                        <li><a href="single.html"><img src="/Assets/images/t3.jpg" alt=" " class="img-responsive" /></a></li>
+                        <li><a href="single.html"><img src="/Assets/images/t2.jpg" alt=" " class="img-responsive" /></a></li>
+                        <li><a href="single.html"><img src="/Assets/images/t4.jpg" alt=" " class="img-responsive" /></a></li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <p class="copy-right">&copy 2017  | Thiết Kế Backend  <a href="http://facebook.com/baole15081998">Bảo Lê</a></p>
+    </div>
+</div>
+<!-- //footer -->

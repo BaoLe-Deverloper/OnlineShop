@@ -1,0 +1,242 @@
+﻿
+@{
+    ViewBag.Title = "AddOrEdit";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@model OnlineShop.Areas.Admin.Model.ProductModel
+
+
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a style="margin-left:20px;" class="btn btn-success" href="/Admin/Products/Index"><i class="fa fa-backward"></i>  Quay lại Danh Sách</a>
+        @if (Model.ProductID != 0)
+        {
+            <a style="margin-left:20px;" class="btn btn-success" href="/Admin/Products/AddOrEdit"><i class="fa fa-plus"></i> Thêm Mới</a>
+        }
+    </li>
+</ol>
+
+<form id="form">
+
+    @Html.HiddenFor(model => model.ProductID)
+
+
+    <div style="float:right;    display: flex;">
+        <div style="width:40%; " class="mydiv form-control" id="mydiv">
+            <div>
+                <label>Tên Sản Phẩm</label>
+                @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                <label>Giá Sản Phẩm (* Vnđ)</label>
+                <input value="@Model.ProductPrice" class = "form-control" id="ProductPrice" />
+               
+
+                @Html.ValidationMessageFor(model => model.ProductPrice, "", new { @class = "text-danger " })
+
+            </div>
+
+            <div>
+                <label>Kích cỡ Sản Phẩm</label>
+
+                @Html.EditorFor(model => model.ProductSize, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProductSize, "", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                <label> Ngày Tạo Sản Phẩm</label>
+                @Html.TextBoxFor(model => model.ProductUpdateDate, new { htmlAttributes = new { @class = "input-group date" }, id = "datepicker" })
+                @Html.ValidationMessageFor(model => model.ProductUpdateDate, "", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                <label>Số Lượng Tồn Kho</label>
+
+                @Html.EditorFor(model => model.ProductQuantity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProductQuantity, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div>
+                <label>Vị Trí trong kho</label>
+
+                @Html.EditorFor(model => model.ProductLocation, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProductLocation, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div>
+                <label>Chất Lượng Sản Phẩm</label>
+
+                @Html.EditorFor(model => model.ProductQuality, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProductQuality, "", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                <label>Màu sản phẩm</label>
+
+                @Html.EditorFor(model => model.ProductColor, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProductColor, "", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                <label>Xếp Hạng Trưng Bày</label>
+
+                @Html.EditorFor(model => model.ProductHot, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProductHot, "", new { @class = "text-danger" })
+            </div>
+
+
+
+            <div style=" padding-bottom:40px">
+                <label style="padding-right:40px;">Loại Sản Phẩm</label>
+
+                @Html.DropDownListFor(model => model.ProductCategoryID, new SelectList(ViewBag.CateList, "CategoryID", "CategoryName"), new { htmlAttributes = new { @class = "btn btn-primary" }, @class = "btn btn-primary" })
+                @Html.ValidationMessageFor(model => model.ProductCategoryID, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+
+
+        <div style="padding-top: 3px; padding-left: 10px;">
+            <a id="SelectImage" href="#" class="btn btn-primary"><i class="fa fa-camera"></i> Thêm ảnh</a>
+            <div id="listimage" style="padding-bottom:200px;">
+
+                @{
+                    if (Model.ListImage != null)
+                    {
+                        foreach (string item in Model.ListImage)
+                        {
+                            <div style="float:left; padding-top:10px;"><img width="100" src=@item /><a href="#" onclick="DeleteImg()" class="btn-delImage"><i class="fa fa-times"></i></a></div>
+
+
+                        }
+                    }
+                }
+            </div>
+
+            <div>
+                <label> Chi tiết Sản Phẩm</label>
+
+                @Html.TextAreaFor(model => model.ProductDetails, new { htmlAttributes = new { @class = "form-control", }, id = "txtContent", })
+
+            </div>
+            <div style="padding-top:40px;margin-left: 67%;">
+
+                <button style="padding-right:30px;" onclick="Save()" class="btn btn-success"><i style="padding-right:10px;" class="fa fa-save"></i>Lưu</button>
+                <button style="padding-right:30px;" type="reset" class="btn btn-warning"><i style="padding-right:10px;" class="fa fa-refresh"></i>Đặt Lại</button>
+
+            </div>
+        </div>
+
+    </div>
+</form>
+<style>
+    .loader {
+        border: 16px solid #f3f3f3; /* Light grey */
+        border-top: 16px solid #3498db; /* Blue */
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        animation: spin 2s linear infinite;
+    }
+    }
+</style>
+@section jsFooter
+{
+    <script>
+
+        $('.btn-delImage').click(function (e) {
+            e.preventDefault();
+            $(this).parent().remove();
+        });
+
+        $(document).ready(function () {
+            $('#datepicker').datepicker({
+                daysOfWeekDisabled: [0, 6],
+                format: "dd/mm/yyyy"
+            });
+        });
+
+        $(document).ready(function () {
+            $('#SelectImage').on('click', function (e) {
+                e.preventDefault();
+                var finder = new CKFinder();
+                finder.selectActionFunction = function (url) {
+                    $('#listimage').append('<div style = "float:left; padding-top:10px;"><img width="100" src="' + url + '"/><a href="#" class="btn-delImage"><i class="fa fa-times"></i></a></div>');
+
+                    $('.btn-delImage').click(function (e) {
+                        e.preventDefault();
+                        $(this).parent().remove();
+                    });
+                };
+                finder.popup();
+            })
+        });
+
+        $(document).ready(function () {
+            var editor = CKEDITOR.replace('txtContent',
+                {
+                    customConfig: '/Assets/Plugins/ckeditor/config.js'
+                })
+        });
+
+        function Save() {
+            $.validator.unobtrusive.parse(this);
+
+            var Images = [];
+            $.each($('#listimage img'), function (i, item) {
+
+                Images.push($(item).prop('src'));
+
+            });
+            var formdata = ReadForm();
+            console.log(formdata);
+
+            $.ajax({
+
+                url: "/Admin/Products/AddOrEditProduct",
+                type: "post",
+                data:
+                    {
+                        "images": JSON.stringify(Images),
+                        "newproduct": JSON.stringify(formdata)
+                    },
+
+                success: function (data) {
+                    if (data.Result) {
+                        $.notify("Lưu thành công !", "success");
+                        $(location).attr("/Admin/Products/Index");
+
+                    };
+                }
+            });
+
+        };
+
+
+        function ReadForm() {
+
+            var formdata = {};
+            formdata["ProductID"] = $('#ProductID').val();
+            formdata["ProductName"] = $('#ProductName').val();
+            formdata["ProductPrice"] = $('#ProductPrice').val();
+            formdata["ProductSize"] = $('#ProductSize').val();
+            formdata["ProductUpdateDate"] = $('#datepicker').val();
+            formdata["ProductQuantity"] = $('#ProductQuantity').val();
+            formdata["ProductQuality"] = $('#ProductQuality').val();
+            formdata["ProductLocation"] = $('#ProductLocation').val();
+            formdata["ProductColor"] = $('#ProductColor').val();
+            formdata["ProductHot"] = $('#ProductHot').val();
+            formdata["ProductCategoryID"] = $('#ProductCategoryID').val();
+            formdata["ProductDetails"] = $('#cke_txtContent').val();
+            return formdata;
+        }
+
+    </script>
+
+}

@@ -1,0 +1,37 @@
+﻿
+.form {
+    background-color: lightgray;
+    border-radius: 5px;
+}
+
+.btnSubmit {
+    float: right;
+}
+
+.bodyCart {
+    padding-top: 20px;
+    margin: 50px;
+}
+
+.headercart {
+    padding-bottom: 30px;
+    text-align: center;
+}
+
+.btnDetailsCart {
+    margin-bottom: 10px;
+}
+
+.table {
+    font-size: 14px;
+}
+
+.imgcart {
+    border-radius: 10px;
+}
+@media only screen and (max-width: 600px) {
+    .imgcart {
+        width:0px;
+
+    }
+}
