@@ -23,8 +23,8 @@
     @Html.HiddenFor(model => model.ProductID)
 
 
-    <div style="float:right;    display: flex;">
-        <div style="width:40%; " class="mydiv form-control" id="mydiv">
+    <div class="row">
+        <div class="form-group-lg col-lg-6">
             <div>
                 <label>Tên Sản Phẩm</label>
                 @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
@@ -47,9 +47,9 @@
                 @Html.ValidationMessageFor(model => model.ProductSize, "", new { @class = "text-danger" })
             </div>
 
-            <div>
-                <label> Ngày Tạo Sản Phẩm</label>
-                @Html.TextBoxFor(model => model.ProductUpdateDate, new { htmlAttributes = new { @class = "input-group date" }, id = "datepicker" })
+            <div style="padding-top:10px;">
+                <label style="padding-right:40px;"> Ngày Tạo : </label>
+                @Html.TextBoxFor(model => model.ProductUpdateDate, new { htmlAttributes = new { @class = " form-control input-group date" }, id = "datepicker" })
                 @Html.ValidationMessageFor(model => model.ProductUpdateDate, "", new { @class = "text-danger" })
             </div>
 
@@ -92,7 +92,7 @@
 
 
 
-            <div style=" padding-bottom:40px">
+            <div style=" padding-top:40px">
                 <label style="padding-right:40px;">Loại Sản Phẩm</label>
 
                 @Html.DropDownListFor(model => model.ProductCategoryID, new SelectList(ViewBag.CateList, "CategoryID", "CategoryName"), new { htmlAttributes = new { @class = "btn btn-primary" }, @class = "btn btn-primary" })
@@ -102,7 +102,7 @@
         </div>
 
 
-        <div style="padding-top: 3px; padding-left: 10px;">
+        <div class="col-lg-6" >
             <a id="SelectImage" href="#" class="btn btn-primary"><i class="fa fa-camera"></i> Thêm ảnh</a>
             <div id="listimage" style="padding-bottom:200px;">
 
@@ -125,7 +125,7 @@
                 @Html.TextAreaFor(model => model.ProductDetails, new { htmlAttributes = new { @class = "form-control", }, id = "txtContent", })
 
             </div>
-            <div style="padding-top:40px;margin-left: 67%;">
+            <div style="float:right; margin:40px;">
 
                 <button style="padding-right:30px;" onclick="Save()" class="btn btn-success"><i style="padding-right:10px;" class="fa fa-save"></i>Lưu</button>
                 <button style="padding-right:30px;" type="reset" class="btn btn-warning"><i style="padding-right:10px;" class="fa fa-refresh"></i>Đặt Lại</button>

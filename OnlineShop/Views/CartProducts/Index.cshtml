@@ -45,17 +45,17 @@
                         <tr role="row">
                             <td>@item.Product.ProductName</td>
                             <td><img style="width:100px; height:100px;" src="@item.Product.ProductImages[0]" /></td>
-                            <td  role="textbox" >@item.Quantity</td>
-                            <td>@item.Product.ProductPrice.ToString("N0") VND</td>
-                            <td>@{ var price = item.Product.ProductPrice * item.Quantity;} @price.ToString("N0") VND</td>
+                            <td><input data-price="@item.Product.ProductPrice" data-sale="@item.Product.ProductSale" class="Quantity" style="width:80px;" type="number" value="@item.Quantity"></td>
+                            <td class="Price">@item.Product.ProductPrice.ToString("N0") VND</td>
+                            <td class="Sum1">@{ var price = item.Product.ProductPrice * item.Quantity;} @price.ToString("N0") VND</td>
                             <td>@item.Product.ProductSale %</td>
-                            <td>@{ var sum = (item.Product.ProductPrice * (1 - (item.Product.ProductSale / 100))) * item.Quantity;} @sum.ToString("N0") VND</td>
+                            <td class="Sum2">@{ var sum = (item.Product.ProductPrice * (1 - (item.Product.ProductSale / 100))) * item.Quantity;} @sum.ToString("N0") VND</td>
 
                             <td>
                                 <a class="btn btn-success"><i class="fa fa-save"></i> Lưu thay đổi</a>
                                 <a href="/CartProducts/Delete/@item.ProductID"  class="btn btn-warning"><i class="fa fa-trash"></i> Xóa Sản phẩm</a>
                             </td>
-                        </tr>
+                         </tr>
                     }
                 }
 
@@ -74,4 +74,19 @@
     { <h4> Giỏ hàng của bạn đang trống !</h4>
         <a href="/" class="btn btn-dark"><i class="fa fa-backward"></i> Tiếp Tục Mua Hàng</a>}
 </div>
+<script>
+
+    $(document).ready(function () {
+        $('.Quantity').change(function () {
+
+            var btn = $(this);
+            var Price = btn.data("price");
+            var Sale = btn.data("sale");
+            var Q = btn.val();
+            var Sum1 = Price * Q;
+            var Sum2 = Sum1 * (1 - Sale / 100);
+            var  
+        })
+    })
+</script>
 @{Html.RenderAction("NewProducts", "ProductsClient"); }
